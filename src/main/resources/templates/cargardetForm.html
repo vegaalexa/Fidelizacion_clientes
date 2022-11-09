@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<br>
+	
+	<div class="container">
+	   <div class="row">
+	      <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+	           <h1 class="text-center" th:text="${titulo}"></h1>
+	           <div class="card-body">
+	              <form th:action="@{/usopuntosdetForm}" th:object="${usopuntosdet}" method="post">
+	                 <input th:field="*{id}" th:value="${usopuntosdet.id}"/>
+                         <!--div th:object="${listCliente}" class="form-group">
+                             <label>Clientes : </label>
+                            <select class="form-control" id="dropDownList">
+                                <option value="0">Seleccionar cliente</option>
+                                <option th:each="listCliente : ${listadoClientes}" 
+                                        th:value="${listCliente.id}" th:text="${listCliente.nombre} +' '+ ${listCliente.apellido}"></option>
+                            </select>
+                             <td th:text="#{${'seedstarter.type.' + sb.type}}">Wireframe</td>
+	                 </div-->
+                         <div class="form-group" th:object="${listBolsapuntos}">
+                             <label>Bolsa de puntos : </label>
+                            <select class="form-control" id="dropDownList">
+                                <option value="0">Seleccionar</option>
+                                <!--option th:each="bp : ${listBolsapuntos}" th:value="${bp.id}" th:text="${bp.cliente_id}" ></option-->
+                            </select>
+	                 </div>
+                         <div class="form-group">
+	                    <label>Indicar el puntaje utilizado por bolsa: </label>
+	                    <input type="number" th:field="*{puntaje_utilizado}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+	                    <small class="form-text text-danger" th:if="${#fields.hasErrors('puntaje_utilizado')}" th:errors="*{puntaje_utilizado}"></small> 
+	                 </div>
+                         <div class="box-footer"> 
+	                     <input type="submit" value="Guardar" class="btn btn-primary">
+	                 </div>
+	              </form>
+	           </div>
+	      </div>
+	   </div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

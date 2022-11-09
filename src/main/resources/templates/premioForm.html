@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+</head>
+<body>
+    <header th:replace="layout/layout :: header"></header>
+    <br>           
+	<div class="container">
+	   <div class="row">
+	      <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+	           <h1 class="text-center" th:text="${titulo}"></h1>
+	           <div class="card-body">
+	              <form th:action="@{/premioForm}" th:object="${premio}" method="post">
+	                 <input type="hidden" th:field="*{id}" th:value="${premio.id}"/>
+                         <!--div class="form-group">
+	                    <label>Descripcion : </label>
+	                    <select class="form-control" th:field="*{descripcion}">
+	                        <option th:value='Consumicion'>Vale de consumicion</option>
+	                        <option th:value='Obsequio'>Vale de obsequio</option>
+                                <option th:value='Descuento'>Vale de descuento</option>
+                                <option th:value='Compra'>Vale de compra</option>
+	                        <option th:value='Otro'>Otro</option>
+	                    </select>
+	                 </div-->
+                         <div class="form-group">
+	                    <label>Descripcion : </label>
+	                    <input type="text" th:field="*{descripcion}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+	                    <small class="form-text text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small> 
+	                 </div>
+	                 <div class="form-group">
+	                    <label>Puntos requeridos : </label>
+	                    <input type="number" th:field="*{puntos_requeridos}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+	                    <small class="form-text text-danger" th:if="${#fields.hasErrors('puntos_requeridos')}" th:errors="*{puntos_requeridos}"></small> 
+	                 </div>
+	                 <div class="box-footer"> 
+	                     <input type="submit" value="Guardar" class="btn btn-primary">
+	                 </div>
+	              </form>
+	           </div>
+	      </div>
+	   </div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

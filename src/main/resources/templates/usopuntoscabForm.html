@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+	
+	<br>
+	
+	<div class="container">
+	   <div class="row">
+	      <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+	           <h1 class="text-center" th:text="${titulo}"></h1>
+	           <div class="card-body">
+	              <form th:action="@{/usopuntoscabForm}" th:object="${usopuntoscab}" method="post">
+	                 <input type="hidden" th:field="*{id}" th:value="${usopuntoscab.id}"/>
+                         <div class="form-group">
+                             <label>Clientes : </label>
+                            <select th:field="*{cliente}" class="form-control">
+                                <!--option value="0">Seleccionar cliente</option>
+                                <option th:each="cliente : ${listadoClientes}" 
+                                        th:value="${cliente.id}" th:text="${cliente_id}+'-'+ ${cliente.nombre} +' '+ ${cliente.apellido}"></option-->
+                                <th:block th:each="cliente : ${listadoClientes}">
+                                    <option th:value="${cliente.id}" th:text="${cliente.id}+'-'+ ${cliente.nombre} +' '+ ${cliente.apellido}">
+                                </th:block>
+                            </select>
+	                 </div>
+                         <div class="form-group">
+	                    <label>Puntaje utilizado : </label>
+	                    <input type="number" th:field="*{puntaje_utilizado}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+	                    <small class="form-text text-danger" th:if="${#fields.hasErrors('puntaje_utilizado')}" th:errors="*{puntaje_utilizado}"></small> 
+	                 </div>
+                         <div class="form-group">
+	                    <label>Fecha : </label>
+	                    <input type="date" th:field="*{fecha}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+	                    <small class="form-text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small> 
+	                 </div>
+                         <div class="form-group">
+                             <label>Premios : </label>
+                            <!--select th:field="*{premio}"class="form-control" id="dropDownList"-->
+                            <select th:field="*{premio}"class="form-control">
+                                <option value="0">Seleccionar premio</option>
+                                <!--option   th:each="premio : ${listadoPremios}" 
+                                        th:value="${premio.id}" th:text="${premio.descripcion}" ></option-->
+                                <th:block th:each="premio : ${listadoPremios}">
+                                    <option th:text="${premio.descripcion}" th:value="${premio.id}">
+                                </th:block>
+                            </select>
+	                 </div>
+                         
+                         <div class="box-footer"> 
+	                     <input type="submit" value="Guardar" class="btn btn-primary">
+	                 </div>
+	              </form>
+	           </div>
+	      </div>
+	   </div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

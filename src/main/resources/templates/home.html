@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  
+    <head th:replace="layout/layout :: head">
+    <meta charset="utf-8">
+    </head>
+    <body>
+    
+	<header th:replace="layout/layout :: header"></header>
+            <section class="vh-100" style="background-color: #508bfc;">
+                <div layout:fragment="content">
+                    <div class="bg-light p-5 rounded">
+                       <h1 class="display-5 text-success">Bienvenido al sistema de canje de puntos</h1>
+                       <h2>Canjea tus compras y gana muchos premios</h2>
+                    </div>	
+                </div>
+                <div class="row">
+                
+                <div class="col-md-3 my-5" >
+                    
+                     <img src="/main/resources/imagenes/Gift-Card.jpg" class="img-fluid">
+                </div>
+                <!--div class="col-md-3 my-5" th:each="pelicula : ${ultimasPeliculas}" th:object="${pelicula}">
+                   <a th:href="@{/peliculas/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration:none;">
+                   <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" th:alt="*{titulo}" class="card-img-top">
+                    <img src="/main/resources/imagenes/Gift-Card.jpg" class="img-fluid" alt="...">
+                   <div class="card-body">
+                      <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
+                      <p th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}" class="text-muted small"></p>
+                   </div>
+                   </a>
+                </div-->
+                </div>
+        
+           </section> 
+        <footer th:replace="layout/layout :: footer"></footer>
+        
+    </body>
+</html>

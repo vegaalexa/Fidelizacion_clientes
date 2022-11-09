@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="layout/layout :: head">
+<meta charset="utf-8">
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="py-4 ml-5 mr-5">
+            <div class="card bg-light">
+                <div class="card-header" th:text="${titulo}"></div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a th:href="@{/bolsaPuntosForm}" class="btn btn-primary">Agregar puntaje por compra</a>
+                    </h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha asignacion de puntaje</th>
+                                <th>Fecha caducidad de puntaje</th>
+                                <th>Puntaje asignado</th>
+                                <th>Puntaje utilizado</th>
+                                <th>Saldo de puntos</th>
+                                <th>Monto operacion de compra</th>
+                                <th sec:authorize="hasRole('ADMIN')">Detalles</th>
+                                <th sec:authorize="hasRole('ADMIN')">Editar</th>
+                                <th sec:authorize="hasRole('ADMIN')">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="bolsapuntos : ${bolsapuntos}">
+                                <td th:text="${bolsapuntos.id}"></td>
+                                <td th:text="${bolsapuntos.fecha_asignacion_puntaje}"></td>
+                                <td th:text="${bolsapuntos.fecha_caducidad_puntaje}"></td>
+                                <td th:text="${bolsapuntos.puntaje_asignado}"></td>
+                                <td th:text="${bolsapuntos.puntaje_utilizado}"></td>
+                                <td th:text="${bolsapuntos.saldo_puntos}"></td>
+                                <td th:text="${bolsapuntos.monto_operacion}"></td>
+                                <td><a class="btn btn-info btn-sm"
+                                        th:href="@{/bolsaPuntosVer/} + ${bolsapuntos.id}">Detalles</a></td>
+                                <td sec:authorize="hasRole('ADMIN')"><a
+                                        class="btn btn-warning btn-sm"
+                                        th:href="@{/bolsaPuntosForm/} + ${bolsapuntos.id}">Editar</a></td>
+                                <td sec:authorize="hasRole('ADMIN')"><a
+                                        class="btn btn-danger btn-sm"
+                                        th:href="@{/bolsaPuntosEliminar/} + ${bolsapuntos.id}"
+                                        onclick="return confirm('¿Estás seguro de eliminar la bolsa de puntajes?');">Eliminar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
